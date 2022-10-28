@@ -11,5 +11,4 @@ data class FruitsItem(
     val id: Int,
     val name: String,
     val order: String,
-
-    )
+)

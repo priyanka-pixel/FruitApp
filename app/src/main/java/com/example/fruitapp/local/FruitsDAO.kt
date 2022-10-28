@@ -12,7 +12,7 @@ import com.example.fruitapp.models.FruitsItem
 interface FruitsDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(fruit: Fruits)
-    
+
     @Query("SELECT*FROM Fruits_item")
     fun getAllFruits(): LiveData<List<FruitsItem>>
 
@@ -23,7 +23,7 @@ interface FruitsDAO {
     suspend fun insertDetails(fruit: FruitsItem)
 
     @Query("SELECT * FROM Fruits_item WHERE id = :id")
-    fun getFruit(id:Int): LiveData<FruitsItem>
+    fun getFruit(id: Int): LiveData<FruitsItem>
 
     /**
      * name detail

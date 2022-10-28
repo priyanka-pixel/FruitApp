@@ -9,11 +9,15 @@ import org.junit.Test
 
 class SecondFragmentTest {
     @Before
-    fun setUp(){
-        launchFragmentInHiltContainer<SecondFragment>(bundleOf("id" to 1), R.style.Theme_FruitApp) { }
+    fun setUp() {
+        launchFragmentInHiltContainer<SecondFragment>(
+            bundleOf("id" to 1),
+            R.style.Theme_FruitApp
+        ) { }
     }
+
     @Test
-    fun fruitNameText_shouldVisible(){
+    fun fruitNameText_shouldVisible() {
         onView(withId(R.id.textView))
             .check(matches(isDisplayed()))
             .check(matches(withText("banana")))

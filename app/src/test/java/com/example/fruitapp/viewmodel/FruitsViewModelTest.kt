@@ -1,4 +1,4 @@
-package com.example.roomapp.viewmodel
+package com.example.fruitapp.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
@@ -17,32 +17,28 @@ import org.junit.Test
 class FruitsViewModelTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
-
-    //Repository
-    //viewmodel
-    //observer:livedata
     private lateinit var viewModel: FruitListViewModel
     private val fruitList = listOf(
         FruitsItem("", "Male", 1, "", "John"),
-        FruitsItem("","Female",2,"","Jennie")
+        FruitsItem("", "Female", 2, "", "Jennie")
     )
-    private  val repository: FruitRepository = mockk(relaxed = true){
+    private val repository: FruitRepository = mockk(relaxed = true) {
 
         every { getFruits() } returns MutableLiveData(Resource.success(fruitList))
     }
     private val fruitsObserver: Observer<Resource<List<FruitsItem>>> = mockk(relaxed = true)
 
-            @Before
-            fun setUp(){
-                viewModel = FruitListViewModel(repository)
-                viewModel.repository.observeForever(fruitsObserver)
-            }
-          @Test
-          fun `get fruits should return emit list of fruit`(){
-              verify{fruitsObserver.onChanged(Resource.success(fruitList))
-              }
-              assert(viewModel.repository.value == Resource.success(fruitList))
-          }
+    @Before
+    fun setUp() {
+        viewModel = FruitListViewModel(repository)
+        viewModel.repository.observeForever(fruitsObserver)
+    }
+
+    @Test
+    fun `get fruits should return emit list of fruit`() {
+        verify {
+            fruitsObserver.onChanged(Resource.success(fruitList))
+        }
+        assert(viewModel.repository.value == Resource.success(fruitList))
+    }
 }
-
-

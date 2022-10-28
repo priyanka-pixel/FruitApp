@@ -1,7 +1,6 @@
 package com.example.fruitapp.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-
 import androidx.lifecycle.Observer
 import com.example.fruitapp.local.FruitsDAO
 import com.example.fruitapp.models.FruitsItem
@@ -18,47 +17,30 @@ import org.junit.Rule
 import org.junit.Test
 
 class FruitRepositoryTest {
-    //Rule
-//AAA pattern
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
-    //Arrange
-
     private val fruitsObserver: Observer<Resource<List<FruitsItem>>> = mockk(relaxed = true)
-    private val fruitsObserverDetail:Observer<Resource<FruitsItem>> = mockk(relaxed = true)
-
-
+    private val fruitsObserverDetail: Observer<Resource<FruitsItem>> = mockk(relaxed = true)
     private val remoteDataSource: FruitRemoteDataSource = mockk(relaxed = true)
     private val localDataSource: FruitsDAO = mockk(relaxed = true)
     private lateinit var repository: FruitRepository
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Before
-    fun setUp(){
+    fun setUp() {
         repository = FruitRepository(remoteDataSource, localDataSource)
-        //coroutines
         Dispatchers.setMain(UnconfinedTestDispatcher())
     }
+
     @Test
-    fun `get fruit should return livedata of fruits API Data`(){
+    fun `get fruit should return livedata of fruits API Data`() {
         repository.getFruits().observeForever(fruitsObserver)
-        //Assert: true, false, equals
-        //verify: times; method called
-        verify{ fruitsObserver.onChanged(any())}
+        verify { fruitsObserver.onChanged(any()) }
     }
-    //unit test
-    //re.fun(3)
-    //other var with list
-    //safe code
+
     @Test
-    fun `get fruit detail should return livedata of single fruit data`(){
+    fun `get fruit detail should return livedata of single fruit data`() {
         repository.getFruits().observeForever(fruitsObserver)
-        verify {fruitsObserver.onChanged(any()) }
+        verify { fruitsObserver.onChanged(any()) }
     }
 }
-
-
-
-
-
-

@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent:: class)
+@InstallIn(SingletonComponent::class)
 object AppModule {
 
     @Singleton
@@ -29,44 +29,40 @@ object AppModule {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-
-//==========================================
-
     @Provides
-    fun provideFruitService(retrofit: Retrofit): FruitService
-            = retrofit.create(FruitService::class.java)
-//==========================================
+    fun provideFruitService(retrofit: Retrofit): FruitService =
+        retrofit.create(FruitService::class.java)
+
     /**
      *
      */
     @Singleton
     @Provides
-    fun provideFruitRemoteDataSource(fruitService:FruitService)
-            = FruitRemoteDataSource(fruitService)
-//==========================================
+    fun provideFruitRemoteDataSource(fruitService: FruitService) =
+        FruitRemoteDataSource(fruitService)
+
     /**
      * 4 Local datasource
      */
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext appContext: Context)
-            = AppDatabase.getDatabase(appContext)
+    fun provideDatabase(@ApplicationContext appContext: Context) =
+        AppDatabase.getDatabase(appContext)
 
     @Singleton
     @Provides
-    fun provideRocketDAO(appDatabase: AppDatabase)
-            = appDatabase.fruitsDAO()
+    fun provideRocketDAO(appDatabase: AppDatabase) = appDatabase.fruitsDAO()
 
-    //====================================
     /**
      * 5 Repository
      */
     @Singleton
     @Provides
-    fun provideRepository(remoteDataSource: FruitRemoteDataSource, localDataSource: FruitsDAO)
-            = FruitRepository(remoteDataSource, localDataSource)
+    fun provideRepository(remoteDataSource: FruitRemoteDataSource, localDataSource: FruitsDAO) =
+        FruitRepository(remoteDataSource, localDataSource)
 
     @Singleton
     @Provides
-    fun provideSearchRepository(): MainRepository = MainRepository(provideFruitService(provideRetrofit()))
+    fun provideSearchRepository(): MainRepository =
+        MainRepository(provideFruitService(provideRetrofit()))
 }

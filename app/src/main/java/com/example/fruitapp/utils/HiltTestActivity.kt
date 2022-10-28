@@ -1,5 +1,4 @@
 package com.example.fruitapp.utils
-
 /*
  * Copyright (C) 2019 The Android Open Source Project
  *
@@ -15,8 +14,6 @@ package com.example.fruitapp.utils
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 

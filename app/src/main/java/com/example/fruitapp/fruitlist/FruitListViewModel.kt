@@ -9,7 +9,4 @@ import javax.inject.Inject
 @HiltViewModel
 class FruitListViewModel @Inject constructor(
     repository: FruitRepository
-): ViewModel(){
-        val repository = repository.getFruits()
-
-}
+) : ViewModel() { val repository = repository.getFruits() }

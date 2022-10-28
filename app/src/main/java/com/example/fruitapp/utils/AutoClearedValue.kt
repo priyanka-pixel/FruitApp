@@ -1,5 +1,4 @@
 package com.example.fruitapp.utils
-
 /*
  * Copyright (C) 2018 The Android Open Source Project
  *
@@ -15,15 +14,12 @@ package com.example.fruitapp.utils
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.observe
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
-
 /**
  * A lazy property that gets cleaned up when the fragment's view is destroyed.
  *
@@ -56,7 +52,6 @@ class AutoClearedValue<T : Any>(val fragment: Fragment) : ReadWriteProperty<Frag
         _value = value
     }
 }
-
 /**
  * Creates an [AutoClearedValue] associated with this fragment.
  */

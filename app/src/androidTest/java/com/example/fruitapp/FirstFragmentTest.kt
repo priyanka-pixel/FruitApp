@@ -17,27 +17,31 @@ import org.junit.Test
 class FirstFragmentTest {
 
     private val navController = TestNavHostController(getApplicationContext())
+
     @Before
-    fun setUp(){
-        launchFragmentInHiltContainer<FirstFragment> (Bundle(), R.style.Theme_FruitApp){
+    fun setUp() {
+        launchFragmentInHiltContainer<FirstFragment>(Bundle(), R.style.Theme_FruitApp) {
             navController.setGraph(R.navigation.nav_graph)
-            Navigation.setViewNavController(requireView(),navController)
+            Navigation.setViewNavController(requireView(), navController)
         }
     }
 
     @Test
-    fun checkIfRecyclerViewVisible(){
-        onView(withId(R.id.recyclerView2))
-            .check(matches(isDisplayed()))
-
+    fun checkIfRecyclerViewVisible() {
+        onView(withId(R.id.recyclerView2)).check(matches(isDisplayed()))
     }
+
     @Test
-    fun recyclerViewItemClick_shouldShowDetailFragment(){
+    fun recyclerViewItemClick_shouldShowDetailFragment() {
         onView(withId(R.id.recyclerView2))
             .check(matches(isDisplayed()))
-            .perform(RecyclerViewActions.actionOnItemAtPosition<FruitAdapter.MyViewHolder>(0,click()))
-    //assert
-        //assert(navController.currentDestination?.id == R.id.SecondFragment)
-
+            .perform(
+                RecyclerViewActions.actionOnItemAtPosition<FruitAdapter.MyViewHolder>(
+                    0,
+                    click()
+                )
+            )
+        // assert
+        assert(navController.currentDestination?.id == R.id.SecondFragment)
     }
 }
